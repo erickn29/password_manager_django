@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h2>Список паролей</h2>
+<h4>{{ tagname }}</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">IP</th>
+            <th scope="col">LOGIN</th>
+            <th scope="col">PASSWORD</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pass in tagname.passwordmanager_set.all %}
+            <tr>
+            <td>{{ pass.ip }}</td>
+            <td>{{ pass.login }}</td>
+            <td>{{ pass.password }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block tags %}
+    <h2>Список тегов</h2>
+    <ul>
+    {% for tag in  tags_list %}
+        <li><a href="{{ tag.get_url }}">{{ tag.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
