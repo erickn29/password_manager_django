@@ -19,9 +19,10 @@
             <td>{{ pass.ip }}</td>
             <td>{{ pass.login }}</td>
             <td>{{ pass.password }}</td>
-            {% for tag in pass.tags.all %}
-                <td>{{ tag }}</td>
+            <td>{% for tag in pass.tags.all %}
+                <a href="{{ tag.get_url }}">{{ tag }}</a> <br>
             {% endfor %}
+            </td>
             </tr>
         {% endfor %}
     </tbody>
