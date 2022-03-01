@@ -17,6 +17,7 @@ def index(request):
 
 
 def get_tag(request, tag):
+    tagname = get_object_or_404(Tag, slug=tag)
     pass_list = PasswordManager.objects.all()
     tags_list = Tag.objects.all()
     paginator = Paginator(pass_list, 10)
@@ -25,7 +26,7 @@ def get_tag(request, tag):
     context = {
         'pass_list': pass_list,
         'tags_list': tags_list,
-        'tagname': Tag.objects.filter(slug=tag)[0],
+        'tagname': tagname,
         'tag': Tag.objects.filter(slug=tag)
     }
     return render(request, 'password_manager_app/selected.html', context=context)
