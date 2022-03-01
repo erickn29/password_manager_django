@@ -27,6 +27,5 @@ def get_tag(request, tag):
         'pass_list': pass_list,
         'tags_list': tags_list,
         'tagname': tagname,
-        'tag': Tag.objects.filter(slug=tag)
     }
     return render(request, 'password_manager_app/selected.html', context=context)

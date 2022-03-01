@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for pass in  pass_list %}
+        {% for pass in pass_list %}
             <tr>
             <td>{{ pass.ip }}</td>
             <td>{{ pass.login }}</td>
@@ -32,7 +32,7 @@
     <h2>Список тегов</h2>
     <ul>
     {% for tag in tags_list %}
-        <li><a href="{{ tag.get_url }}">{{ tag.name }}</a></li>
+        <li><a href="{{ tag.get_url }}">{{ tag.name }}</a> ({{ tag.passwordmanager_set.count }})</li>
     {% endfor %}
     </ul>
 {% endblock %}
