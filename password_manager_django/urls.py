@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from password_manager_app import views
 
 admin.site.site_header = 'Админ панель'
 admin.site.index_title = 'Менеджер паролей'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('password_manager_app.urls'))
+    path('', views.index),
+    path('tag/', include('password_manager_app.urls'))
 ]
 
