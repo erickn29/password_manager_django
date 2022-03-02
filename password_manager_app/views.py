@@ -2,8 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
 from password_manager_app.models import PasswordManager, Tag
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
+    search_query = request.GET.get('q', '')
+    if search_query:
+        pass_list = PasswordManager.objects.filter(ip__icontains=search_query)
     pass_list = PasswordManager.objects.order_by('-id')
     tags_list = Tag.objects.all()
     paginator = Paginator(pass_list, 10)
@@ -29,3 +33,16 @@ def get_tag(request, tag):
         'tagname': tagname,
     }
     return render(request, 'password_manager_app/selected.html', context=context)
+
+
+def get_search_result(request):
+    search_query = request.GET.get('q', '')
+    if search_query:
+        pass_list = PasswordManager.objects.filter(Q(ip__icontains=search_query) | Q(login__icontains=search_query))
+    else:
+        pass_list = PasswordManager.objects.order_by('-id')
+    tags_list = Tag.objects.all()
+    return render(request, 'password_manager_app/search.html', context={
+        'pass_list': pass_list,
+        'tags_list': tags_list,
+    })

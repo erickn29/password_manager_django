@@ -14,9 +14,17 @@
 </head>
 <body>
 {% include 'includes/navbar.html' %}
-    <div class="container"> 
-        <h1>Менеджер Паролей</h1>
+    <div class="container">
+        <div class="top" style="margin: 20px 0;">
+            <h1>Менеджер Паролей</h1>
         <h3>by Yaroslav Novikov</h3>
+        <div class="search" style="display:flex; justify-content: center; margin-top: 25px;">
+            <form class="d-flex col-md-6" action="{% url 'search_results' %}" method="get">
+                <input name="q" class="form-control me-2" type="search" placeholder="IP, Логин, Тег" aria-label="Search">
+                <button class="btn btn-warning" type="submit">Искать</button>
+            </form>
+        </div>
+        </div>
         <div class="row">
             <div class="col-md-3 left">
                 {% block tags %} 
