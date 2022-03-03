@@ -10,18 +10,18 @@
             <th scope="col">IP</th>
             <th scope="col">LOGIN</th>
             <th scope="col">PASSWORD</th>
-            <th scope="col">TAG</th>
         </tr>
     </thead>
     <tbody>
         {% for pass in pass_list %}
             <tr>
-            <td>{{ pass.ip }}</td>
+            <td>{{ pass.ip }}<br>
+                {% for tag in pass.tags.all %}
+                <a href="{{ tag.get_url }}"><span class="badge badge-primary">{{ tag }}</span></a>
+                {% endfor %}
+            </td>
             <td>{{ pass.login }}</td>
             <td>{{ pass.password }}</td>
-            <td>{% for tag in pass.tags.all %}
-                <a href="{{ tag.get_url }}">{{ tag }}</a> <br>
-            {% endfor %}
             </td>
             </tr>
         {% endfor %}
@@ -33,7 +33,7 @@
     <h2>Список тегов</h2>
     <ul>
     {% for tag in tags_list %}
-        <li><a href="{{ tag.get_url }}">{{ tag.name }}</a> ({{ tag.passwordmanager_set.count }})</li>
+        <li><a href="{{ tag.get_url }}">{{ tag.name }}</a> <span class="badge badge-primary">{{ tag.passwordmanager_set.count }}</span></li>
     {% endfor %}
     </ul>
 {% endblock %}
