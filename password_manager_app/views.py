@@ -48,10 +48,12 @@ def new_post(request):
     else:
         # Отправлены данные POST; обработать данные.
         form = PasswordManagerForm(data=request.POST)
-        if form.is_valid():
+        if form.is_valid() and tags_form.is_valid():
             form.save()
         return redirect('index')
-    context = {'form': form}
+    context = {
+        'form': form,
+    }
     return render(request, 'password_manager_app/new_post.html', context)
 
 

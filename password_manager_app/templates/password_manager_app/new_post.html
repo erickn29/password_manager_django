@@ -4,6 +4,18 @@
 <form action="{% url 'new_post' %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="submit">add topic</button>
+
+    <div class="row">
+        <div class="col">
+            {{ form.ip }}
+        </div>
+        <div class="col">
+            {{ form.login }}
+        </div>
+        <div class="col">
+            {{ form.password }}
+        </div>
+    </div>
+    <button name="submit">Добавить запись</button>
 </form>
 {% endblock %}

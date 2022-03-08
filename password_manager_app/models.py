@@ -18,9 +18,9 @@ class Tag(models.Model):
 
 class PasswordManager(models.Model):
 
-    ip = models.CharField(max_length=15, null=False, default=f'{randint(1,255)}.{randint(1,255)}.{randint(1,255)}.{randint(1,255)}')
-    login = models.CharField(max_length=100, null=False, default='login')
-    password = models.CharField(max_length=100, null=False, default='password')
+    ip = models.CharField(max_length=15, null=False)
+    login = models.CharField(max_length=100, null=False)
+    password = models.CharField(max_length=100, null=False)
     tags = models.ManyToManyField(Tag, blank=True)
 
 
