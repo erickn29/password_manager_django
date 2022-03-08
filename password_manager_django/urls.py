@@ -22,8 +22,9 @@ admin.site.index_title = 'Менеджер паролей'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('', views.index, name='index'),
     path('search/', views.index, name='search_results'),
-    path('tag/', include('password_manager_app.urls'))
+    path('tag/', include('password_manager_app.urls')),
+    path('new_post/', views.new_post, name='new_post'),
 ]
 

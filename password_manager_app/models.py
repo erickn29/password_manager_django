@@ -26,3 +26,12 @@ class PasswordManager(models.Model):
 
     def __str__(self):
         return f'{self.ip}'
+
+
+class User(models.Model):
+    user_login = models.CharField(max_length=15, default='log')
+    user_password = models.CharField(max_length=24, default='pass')
+    user_email = models.EmailField(max_length = 254, default='email@email.email')
+
+    def __str__(self):
+        return f'{self.user_login}'

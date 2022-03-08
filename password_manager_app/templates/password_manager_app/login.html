@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+ERROR
+{% endif %}
+
+<form method="POST" action="{% url 'password_manager_app:login' %}">
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}
