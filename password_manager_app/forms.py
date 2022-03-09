@@ -11,17 +11,11 @@ class PasswordManagerForm(forms.ModelForm):
             'ip': 'Ресурс',
             'login': 'Логин',
             'password': 'Пароль',
-            'tags': 'Выбрать теги',
+            'tags': 'Выберите теги',
         }
 
-
-# class TagsForm(forms.ModelForm):
-#     class Meta:
-#         model = Tag
-#         fields = ['name', 'slug']
-#         labels = {
-#             'name': 'Добавить тег',
-#             'slug': ''
-#         }
-#
-#     prepopulated_fields = {'slug': ('name',)}
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )

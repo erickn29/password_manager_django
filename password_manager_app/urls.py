@@ -4,5 +4,4 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('<str:tag>', views.get_tag, name='tags'),
-    path('login/', include('django.contrib.auth.urls')),
 ]

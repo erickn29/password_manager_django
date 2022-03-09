@@ -1,21 +1,34 @@
 {% extends 'base.html' %}
 
+{% block title %}<title>Добавление записи</title>{% endblock %}
+
+{% load crispy_forms_tags %}
+
 {% block content %}
 <form action="{% url 'new_post' %}" method='post'>
+
     {% csrf_token %}
-    {{ form.as_p }}
 
     <div class="row">
         <div class="col">
-            {{ form.ip }}
+            {{ form.ip|as_crispy_field }}
         </div>
         <div class="col">
-            {{ form.login }}
+            {{ form.login|as_crispy_field }}
         </div>
         <div class="col">
-            {{ form.password }}
+            {{ form.password|as_crispy_field }}
         </div>
     </div>
-    <button name="submit">Добавить запись</button>
+    <div class="col">
+        {{ form.tags|as_crispy_field }}
+    </div>
+    <button name="submit" class="btn btn-primary">Добавить запись</button>
+    <hr>
+    * - обязательно к заполнению
 </form>
+{% endblock %}
+
+{% block tags %}
+<h2>Добавление записи</h2>
 {% endblock %}

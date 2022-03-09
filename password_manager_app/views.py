@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpResponseNotFound
 from password_manager_app.models import PasswordManager, Tag
 from django.core.paginator import Paginator
 from django.db.models import Q
-from itertools import chain
 from .forms import PasswordManagerForm
 
 
@@ -12,12 +11,12 @@ def index(request):
     if search_query:
         pass_list = PasswordManager.objects.filter(
             Q(ip__icontains=search_query) |
-            Q(login__icontains=search_query.lower()) |
-            Q(tags__name__icontains=search_query.lower())
+            Q(login__icontains=search_query)
+            # Q(tags__name__icontains=search_query)
         )
     else:
         pass_list = PasswordManager.objects.order_by('-id')
-    tags_list = Tag.objects.all()
+    tags_list = Tag.objects.order_by('name')
     context = {
         'pass_list': pass_list,
         'tags_list': tags_list
@@ -27,11 +26,8 @@ def index(request):
 
 def get_tag(request, tag):
     tagname = get_object_or_404(Tag, slug=tag)
-    pass_list = PasswordManager.objects.all()
-    tags_list = Tag.objects.all()
-    # paginator = Paginator(pass_list, 10)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
+    pass_list = PasswordManager.objects.order_by('-id')
+    tags_list = Tag.objects.order_by('name')
     context = {
         'pass_list': pass_list,
         'tags_list': tags_list,
@@ -48,7 +44,7 @@ def new_post(request):
     else:
         # Отправлены данные POST; обработать данные.
         form = PasswordManagerForm(data=request.POST)
-        if form.is_valid() and tags_form.is_valid():
+        if form.is_valid():
             form.save()
         return redirect('index')
     context = {
