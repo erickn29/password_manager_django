@@ -7,15 +7,15 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">IP</th>
-            <th scope="col">LOGIN</th>
-            <th scope="col">PASSWORD</th>
+            <th scope="col">Ресурс</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Пароль</th>
         </tr>
     </thead>
     <tbody>
         {% for pass in pass_list %}
             <tr>
-            <td>{{ pass.ip }}<br>
+            <td><b>{{ pass.ip }}</b><br>
                 {% for tag in pass.tags.all %}
                 <a href="{{ tag.get_url }}"><span class="badge badge-primary">{{ tag }}</span></a>
                 {% endfor %}
