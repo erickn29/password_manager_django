@@ -53,6 +53,8 @@ def new_post(request):
     return render(request, 'password_manager_app/new_post.html', context)
 
 
-
+def edit_post(request, post_slug):
+    post = get_object_or_404(PasswordManager, post_slug=post_slug)
+    return render(request, 'password_manager_app/post_page.html', context={'post': post})
 
 

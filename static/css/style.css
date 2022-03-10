@@ -44,6 +44,20 @@ li a{
 }
 
 .table .badge, li .badge{
-    background-color: #006aff !important;
+    background-color: #5286d1 !important;
     font-weight: 500;
+}
+
+li .badge {
+    font-size: 10px;
+}
+
+.table a{
+    text-decoration: none !important;
+    color: #222 !important;
+}
+
+.table a:hover{
+    text-decoration: none !important;
+    color: #3272cd !important;
 }

@@ -16,7 +16,7 @@
     <tbody>
         {% for pass in tagname.passwordmanager_set.all %}
             <tr>
-            <td>{{ pass.ip }}<br>
+            <td><b><a href="{{ pass.get_url }}"><b>{{ pass.ip }}</b></a></b><br>
                 {% for tag in pass.tags.all %}
                 <a href="{{ tag.get_url }}"><span class="badge badge-primary">{{ tag }}</span></a>
                 {% endfor %}

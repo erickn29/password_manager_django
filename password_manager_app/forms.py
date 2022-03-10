@@ -1,8 +1,15 @@
 from django import forms
-from .models import User, PasswordManager, Tag
+from .models import Users, PasswordManager, Tag
 
 
 class PasswordManagerForm(forms.ModelForm):
+
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label='Выберите теги'
+    )
 
     class Meta:
         model = PasswordManager
@@ -11,11 +18,6 @@ class PasswordManagerForm(forms.ModelForm):
             'ip': 'Ресурс',
             'login': 'Логин',
             'password': 'Пароль',
-            'tags': 'Выберите теги',
+            'tags': 'Выберите теги'
         }
 
-    tags = forms.ModelMultipleChoiceField(
-        queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False
-    )
