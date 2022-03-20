@@ -1,5 +1,5 @@
 from django import forms
-from .models import Users, PasswordManager, Tag
+from .models import PasswordManager, Tag
 
 
 class PasswordManagerForm(forms.ModelForm):

@@ -2,8 +2,33 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}<title>{{ post.ip }}</title>{% endblock %}
 
 {% block content %}
     <h3>Редактировать запись {{ post.ip }}</h3>
+
+    <form action="{% url 'edit_post' post.post_slug %}" method='post'>
+
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ form.ip|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.login|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.password|as_crispy_field }}
+        </div>
+    </div>
+    <div class="col">
+        {{ form.tags|as_crispy_field }}
+    </div>
+    <button name="submit" class="btn btn-primary">Изменить запись</button>
+    <hr>
+</form>
+
 {% endblock %}

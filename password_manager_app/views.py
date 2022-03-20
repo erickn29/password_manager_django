@@ -54,7 +54,17 @@ def new_post(request):
 
 
 def edit_post(request, post_slug):
+    """Редактирует существующую запись."""
     post = get_object_or_404(PasswordManager, post_slug=post_slug)
-    return render(request, 'password_manager_app/post_page.html', context={'post': post})
+    if request.method != 'POST':
+        # Данные не отправлялись; создается пустая форма.
+        form = PasswordManagerForm(instance=post)
+    else:
+        # Отправлены данные POST; обработать данные.
+        form = PasswordManagerForm(instance=post, data=request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('index')
+    return render(request, 'password_manager_app/post_page.html', context={'post': post, 'form':form})
 
 
