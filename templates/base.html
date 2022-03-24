@@ -7,14 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block css_add %}
     {% endblock %}
+    {% block head_add %}
+    {% endblock %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favv.png' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{% static 'js/switcher.js' %}"></script>
+    <script src="{% static 'js/copy.js' %}"></script>
+    <script src="{% static 'js/one_pass_switch.js' %}"></script>
     {% block title %}<title>Менеджер Паролей</title>{% endblock %}
 </head>
 <body>
 {% include 'includes/navbar.html' %}
+{% if user.is_authenticated %}
     <div class="container">
         <div class="top" style="margin: 20px 0;">
             <h1>Менеджер Паролей</h1>
@@ -25,6 +32,14 @@
             </form>
         </div>
         </div>
+{% endif %}
+{% block top %}
+<div class="row">
+    <div class="col-md-12">
+        
+    </div>
+</div> 
+{% endblock %}
         <div class="row">
             <div class="col-md-3 left">
                 {% block tags %} 

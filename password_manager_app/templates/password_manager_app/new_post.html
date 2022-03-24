@@ -4,31 +4,49 @@
 
 {% load crispy_forms_tags %}
 
+{% block top %}
+<h2 style="text-align: center; margin: 20px;">Добавление записи</h2>
+
+<div class="login-form">
+    <form action="{% url 'new_post' %}" method='post'>
+    
+        {% csrf_token %}
+    
+        <div class="row login-form">
+            <div class="col-md-3">
+                {{ form.resource_name|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+                {{ form.ip|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+                {{ form.login|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+                {{ form.password|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.esia_login|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ form.tags|as_crispy_field }}
+                <div class="invisible">{{ form.post_author }}</div>
+            </div>
+        </div>
+        <button name="submit" class="btn btn-primary">Добавить запись</button>
+        <hr>
+        * - обязательно к заполнению
+    </form>
+    </div>
+
+{% endblock %}
+
 {% block content %}
-<form action="{% url 'new_post' %}" method='post'>
 
-    {% csrf_token %}
-
-    <div class="row">
-        <div class="col-md-4">
-            {{ form.ip|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{ form.login|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{ form.password|as_crispy_field }}
-        </div>
-    </div>
-    <div class="col">
-        {{ form.tags|as_crispy_field }}
-    </div>
-    <button name="submit" class="btn btn-primary">Добавить запись</button>
-    <hr>
-    * - обязательно к заполнению
-</form>
 {% endblock %}
 
 {% block tags %}
-<h2>Добавление записи</h2>
+
 {% endblock %}

@@ -3,10 +3,10 @@ from .models import PasswordManager, Tag
 
 
 class PasswordManagerAdmin(admin.ModelAdmin):
-    list_display = ['ip', 'login', 'password', 'post_slug']
-    list_editable = ['login', 'password']
+    list_display = ['resource_name', 'ip', 'login', 'post_author']
+    list_editable = []
     filter_horizontal = ['tags']
-    prepopulated_fields = {'post_slug': ('ip',)}
+    prepopulated_fields = {'post_slug': ('ip',), 'resource_name_alias':('resource_name',)}
 
 
 class TagAdmin(admin.ModelAdmin):

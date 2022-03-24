@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block head_add %}
+<meta http-equiv="refresh" content="2;URL={% url 'users:login' %}"/>
+{% endblock %}
+
+{% block content %}
+ <h2>Вы вышли из своей учетной записи</h2>
+{% endblock %}
+

@@ -26,6 +26,8 @@ urlpatterns = [
     path('search/', views.index, name='search_results'),
     path('tag/', include('password_manager_app.urls')),
     path('new_post/', views.new_post, name='new_post'),
-    path('edit_post/<str:post_slug>', views.edit_post, name='edit_post')
+    path('edit_post/<str:post_slug>', views.edit_post, name='edit_post'),
+    path('delete_post/<str:post_slug>', views.delete_post, name='delete_post'),
+    path('users/', include('users.urls'))
 ]
 

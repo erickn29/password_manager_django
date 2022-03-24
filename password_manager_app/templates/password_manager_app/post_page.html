@@ -6,29 +6,49 @@
 
 {% block title %}<title>{{ post.ip }}</title>{% endblock %}
 
-{% block content %}
-    <h3>Редактировать запись {{ post.ip }}</h3>
+{% block top %}
+
+<h2 style="text-align: center; margin: 20px;">Редактировать запись {{ post.ip }}</h2>
+
+    <div class="login-form">
 
     <form action="{% url 'edit_post' post.post_slug %}" method='post'>
 
     {% csrf_token %}
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
+            {{ form.resource_name|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
             {{ form.ip|as_crispy_field }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ form.login|as_crispy_field }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ form.password|as_crispy_field }}
         </div>
     </div>
-    <div class="col">
-        {{ form.tags|as_crispy_field }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.esia_login|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ form.tags|as_crispy_field }}
+        </div>
     </div>
     <button name="submit" class="btn btn-primary">Изменить запись</button>
     <hr>
 </form>
+<form action="{% url 'delete_post' post.post_slug %}" method="post">
+    {% csrf_token %}
+    <button name="submit" class="btn btn-danger">Удалить запись</button>
+</form>
+</div>
 
+{% endblock %}
+
+{% block content %}
+    
 {% endblock %}

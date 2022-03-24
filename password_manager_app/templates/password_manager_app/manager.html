@@ -2,39 +2,76 @@
 
 {% load static %}
 
+{% load tz %}
+
+
+
 {% block content %}
+{% if user.is_authenticated %}
 <h2>Список паролей</h2>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Ресурс</th>
+            <th scope="col">Имя ресурса</th>
+            <th scope="col">Адрес ресурса</th>
             <th scope="col">Логин</th>
-            <th scope="col">Пароль</th>
+            <th scope="col" style="width: 250px;">Пароль </div></th>
         </tr>
     </thead>
     <tbody>
         {% for pass in pass_list %}
             <tr>
-            <td><a href="{{ pass.get_url }}"><b>{{ pass.ip }}</b></a><br>
-                {% for tag in pass.tags.all %}
-                <a href="{{ tag.get_url }}"><span class="badge badge-primary">{{ tag }}</span></a>
-                {% endfor %}
-            </td>
-            <td>{{ pass.login }}</td>
-            <td>{{ pass.password }}</td>
+                <td>
+                    {% if pass.resource_name %}
+                    <strong>{{ pass.resource_name }}</strong><br>
+                    {% else %}
+                    <strong>{{ pass.ip }}</strong><br>
+                    {% endif %}
+                    {% timezone "Europe/Moscow" %}
+                    <span style="font-size: 11px;">{{ pass.post_time|date:"d M Y H i" }}</span>
+                    {% endtimezone %}
+                </td>
+                <td><a href="{{ pass.get_url }}">
+                    <img src="{% static 'img/pencil-square.svg' %}" alt="edit" srcset="" style="width: 13px; margin-right: 5px;"></a>{{ pass.ip }}
+                    {% if pass.esia_login %}
+                    <img src="{% static 'img/goslogo.png' %}" alt="gosuslugi" style="width:50px">
+                    {% endif %}
+                    <br>
+                    {% for tag in pass.tags.all %}
+                    <a href="{{ tag.get_url }}"><span class="badge badge-primary">{{ tag }}</span></a>
+                    {% endfor %}
+                </td>
+                <td>{{ pass.login }}</td>
+                <td>
+                        <div class="row">
+                            <div class="passwords col-md-8" id="{{ pass.login }}"><p>{{ pass.password }}</p></div>
+                            <a class="content_toggle col-md-2" data-target="#{{ pass.login }}" href=""><img src="{% static 'img/eye-fill.svg' %}"></a>
+                            <a  class='col-md-2' href="" id='copy' onclick="copytext('#{{ pass.login }}')"><img src="{% static 'img/clipboard-fill.svg' %}" alt="" srcset=""></a>
+                        </div>
+                    
+                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 </div>
+{% else %}
+<div class="attention col-md-6">
+    <h2>Вы не авторизованы</h2>
+    <a href="{% url 'users:login' %}"><button class="btn btn-primary" type="submit">Авторизоваться</button></a>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block tags %}
+{% if user.is_authenticated %}
     <h2>Список тегов</h2>
     <ul>
     {% for tag in tags_list %}
         <li><a href="{{ tag.get_url }}">{{ tag.name }}</a> <span class="badge badge-primary">{{ tag.passwordmanager_set.count }}</span></li>
     {% endfor %}
     </ul>
+    {% endif %}
 {% endblock %}
+
